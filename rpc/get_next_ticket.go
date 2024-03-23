@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/vynious/gd-joinqueue-cms/pb/proto_files/queue"
+	"github.com/ljlimjk10/gym-avail-ms/pb/proto_files/queue"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 )
@@ -34,6 +34,8 @@ func GRPCGetNextInQueue(ctx context.Context) (*queue.Ticket, error) {
 	if err != nil {
 		return nil, fmt.Errorf("failed to get next ticket")
 	}
+
+	go GRPCSendNotification(ctx, nil, ticket, "Coming-Soon")
 
 	return ticket, nil
 }

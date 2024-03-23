@@ -9,6 +9,7 @@ import (
 	"github.com/go-pg/pg/v10"
 
 	"github.com/ljlimjk10/gym-avail-ms/models"
+	"github.com/ljlimjk10/gym-avail-ms/rpc"
 )
 
 // type AvailabilityResponse struct {
@@ -50,6 +51,7 @@ func UpdateCurrentAvail(c *gin.Context, db *pg.DB) {
 
 	if reqBody.UpdateType == "increment" {
 		gymAvail.IncrementCurrentAvailability(db, reqBody.Quantity)
+		rpc.GRPCGetNextInQueue(c)
 	} else if reqBody.UpdateType == "decrement" {
 		gymAvail.DecrementCurrentAvailability(db, reqBody.Quantity)
 	} else {

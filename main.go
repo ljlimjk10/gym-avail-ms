@@ -27,6 +27,6 @@ func main() {
 		})
 	}
 
-	router.Run("localhost:8083")
+	router.Run("0.0.0.0:3006")
 
 }
